@@ -1,0 +1,18 @@
+
+<div class="row row-cols-12 row-cols-md-3 g-4">
+    @for (newRelease of nuevosReleases?.albums?.items; track newRelease.id) {
+        <div class="col">
+            <div class="card h-100">
+                <img [src]="newRelease.images[0].url" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{newRelease.name}}</h5>
+                    <p class="card-text">
+                        @for (artist of newRelease.artists ; track artist.id) {
+                            <span class="badge rounded-pill text-bg-success">{{artist.name}}</span>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
