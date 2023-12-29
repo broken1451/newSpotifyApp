@@ -1,0 +1,13 @@
+<div class="col" (click)="verArtista(newRelease)">
+    <div class="card h-100">
+        <img [src]="newRelease.images | noimage" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{newRelease.name}}</h5>
+            <p class="card-text">
+                @for (artist of newRelease.artists ; track artist.id) {
+                     <span class="badge rounded-pill text-bg-success">{{artist.name}}</span>
+                }
+            </p>
+        </div>
+    </div>
+</div>

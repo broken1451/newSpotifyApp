@@ -8,7 +8,7 @@ export const interceptorSpotify: HttpInterceptorFn = (request, next) => {
   console.log(`Intercept service: ${request?.url}, method: ${request?.method}`);
 
   const reqWithHeader = request.clone({
-    headers: request.headers.set('Authorization', 'Bearer BQC0hHqx6-EIw_UviALWpFlbJAnqbZSNvVkOhBNUES-NK66Irb3Jh6fhi1V7nHMqP-sEHkF1BqEc6qFggVHiKX04mQkM2um8d-OLAAdLN5B8nInBeGw'),
+    headers: request.headers.set('Authorization', 'Bearer BQBYuOygDuiPhjd_Rtp4VrTFzjlpmggR-EkvyvpJ18boLATCQwBKlkDUkYvmIWzpdZBnMEufXydi4bpFUOxPkRH6kc3ERVV5A_O2gQ44looBMLVVrJQ'),
   });
 
   return next(reqWithHeader).pipe(

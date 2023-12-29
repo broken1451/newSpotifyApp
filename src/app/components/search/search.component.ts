@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
-import { ArtistsArray } from '../interfaces/artistas.interface';
+import { ArtistsArray, Item } from '../interfaces/artistas.interface';
 
 @Component({
   selector: 'app-search',
@@ -9,8 +9,9 @@ import { ArtistsArray } from '../interfaces/artistas.interface';
 })
 export class SearchComponent implements OnInit {
   
-  public artistas!: ArtistsArray | undefined;
+  public artistas: Item[] | undefined = [];
   public showAlert: boolean = false;
+  public loading: boolean = false;
 
   constructor(private spotifyService: SpotifyService) { }
     
@@ -18,29 +19,30 @@ export class SearchComponent implements OnInit {
   }
 
   public buscar(termino: string) {
-  console.log(termino);
+    this.loading = true;
     if (termino.length === 0) {
       this.artistas = undefined;
+      this.loading = false;
       return;
     }
 
     this.spotifyService.getArtistByTermino(termino).subscribe({
-      next: (data) => { 
-        console.log(data);
+      next: (data) => {
         this.artistas = data;
-        if (this.artistas.artists.items.length === 0) {
+        if (this.artistas.length === 0) {
           this.showAlert = true;
+          this.loading = false;
           return;
         } else {
           this.showAlert = false;
+          this.loading = false;
         }
-        localStorage.setItem('artistas', JSON.stringify(data));
+        // localStorage.setItem('artistas', JSON.stringify(data));
       },
       error: (error) => {
         console.log(error);
       }
-    })
-
+    });
   }
 
 }

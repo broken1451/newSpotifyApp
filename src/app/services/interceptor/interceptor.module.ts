@@ -23,7 +23,7 @@ export class InterceptorSpotify implements HttpInterceptor {
     console.log(`Intercept service: ${request?.url}, method: ${request?.method}`);
 
     const reqWithHeader = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer BQC0hHqx6-EIw_UviALWpFlbJAnqbZSNvVkOhBNUES-NK66Irb3Jh6fhi1V7nHMqP-sEHkF1BqEc6qFggVHiKX04mQkM2um8d-OLAAdLN5B8nInBeGw'),
+      headers: request.headers.set('Authorization', 'Bearer BQCCAP6TZ3BWkILfMo24tpG6yv-x1SNZT4ZwI0ooetEWTXeYikGtuC-JGbGvpRZkMIBwMscvpv7W5ZSOEzbtFo-BRfjXiPsk0PlVbsxj53UsySEBchg'),
     });
 
     return next.handle(reqWithHeader).pipe(

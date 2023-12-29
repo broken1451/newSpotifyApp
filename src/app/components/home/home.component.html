@@ -1,18 +1,16 @@
-
-<div class="row row-cols-12 row-cols-md-3 g-4">
-    @for (newRelease of nuevosReleases?.albums?.items; track newRelease.id) {
-        <div class="col">
-            <div class="card h-100">
-                <img [src]="newRelease.images[0].url" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{newRelease.name}}</h5>
-                    <p class="card-text">
-                        @for (artist of newRelease.artists ; track artist.id) {
-                            <span class="badge rounded-pill text-bg-success">{{artist.name}}</span>
-                        }
-                    </p>
-                </div>
-            </div>
-        </div>
+@if (loading) {
+<app-loading></app-loading>
+} @else {
+<div class="row row-cols-12 row-cols-md-3 g-4 mt-3 puntero">
+    @for (newRelease of nuevosReleases; track newRelease.id;) {
+    <app-tarjeta [newRelease]="newRelease" />
     }
 </div>
+}
+
+@if (error) {
+<div class="alert alert-danger animated fadeIn">
+    <h3>Error</h3>
+    <p>{{msgError}}</p>
+</div>
+}

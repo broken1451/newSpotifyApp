@@ -1,0 +1,8 @@
+<div class="col" (click)="verArtista(artist)">
+    <div class="card h-100">
+        <img [src]="artist.images | noimage" class="card-img-top" [alt]="artist.name">
+        <div class="card-body">
+            <h5 class="card-title">{{artist.name}}</h5>
+        </div>
+    </div>
+</div>

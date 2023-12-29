@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { ComponentsComponent } from './components.component';
 
-
 @NgModule({
   declarations: [
-    ComponentsComponent
+    ComponentsComponent    
   ],
   imports: [
     CommonModule,
     ComponentsRoutingModule
-  ]
+  ],
+  exports: []
 })
 export class ComponentsModule { }

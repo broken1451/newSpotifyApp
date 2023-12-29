@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ArtistRoutingModule } from './artist-routing.module';
-import { ArtistComponent } from './artist.component';
+import { TarjetaComponent } from './tarjeta.component';
 import { SharedModule } from '../../shared/shared.module';
+
 
 
 @NgModule({
   declarations: [
-    ArtistComponent
+    TarjetaComponent
   ],
   imports: [
     CommonModule,
-    ArtistRoutingModule,
     SharedModule
+  ],
+  exports: [
+    TarjetaComponent
   ]
 })
-export class ArtistModule { }
+export class TarjetaModule { }

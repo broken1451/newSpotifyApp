@@ -1,25 +1,23 @@
 <div class="row">
     <div class="col">
         <h2>Buscar Artista</h2>
-        <input type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Buscar Artista" #termino> <!-- #termino es referencia local -->
+        <input type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Buscar Artista" #termino>
+        <!-- #termino es referencia local -->
     </div>
 </div>
 
-<div class="row row-cols-12 row-cols-md-3 g-4 m-5">
-    @if (artistas?.artists?.items?.length! > 0) {
-       @for (artist of artistas?.artists?.items; track artist.id) {
-            <div class="col">
-                <div class="card h-100">
-                    <img [src]="artist.images[0]?.url" class="card-img-top" [alt]="artist.name">
-                    <div class="card-body">
-                        <h5 class="card-title">{{artist.name}}</h5>
-                    </div>
-                </div>
+@if (loading) {
+    <app-loading class="m-5"></app-loading>
+} @else {
+    <div class="row row-cols-12 row-cols-md-3 g-4 m-5 mt-5 puntero">
+        @if (artistas?.length! > 0) {
+            @for (artist of artistas; track artist.id) {
+                <app-tarjeta-search [artist]="artist" />
+            }
+        } @else {
+            <div class="alert alert-warning" role="alert" *ngIf="showAlert">
+                No se encontraron resultados
             </div>
         }
-    } @else {
-        <div class="alert alert-warning" role="alert" *ngIf="showAlert">
-            No se encontraron resultados
-        </div>
-    }
-</div>
+    </div>
+}
