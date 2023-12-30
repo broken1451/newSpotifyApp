@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import { Item, NewReleases } from '../interfaces/artist.interface';
 import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,13 @@ export class HomeComponent implements OnInit {
   public error: boolean = false;
   public msgError: string = '';
 
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private spotifyService: SpotifyService, public router: Router) { }
 
- async ngOnInit() {
+  async ngOnInit() {
     this.refresToken();
+    if (localStorage.getItem('token') === null) {
+      this.router.navigate(['/search']);
+   }
     this.getNewReleases();
   }
 
