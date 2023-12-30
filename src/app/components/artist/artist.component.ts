@@ -25,6 +25,7 @@ export class ArtistComponent implements OnInit {
    * @returns {void}
    */
   ngOnInit(): void {
+    this.refresToken();
     this.activateRoute.params.pipe(
       switchMap(({ id }) => {
         return forkJoin([
@@ -37,8 +38,6 @@ export class ArtistComponent implements OnInit {
         // Handle the combined data here
         this.artist = artist;
         this.topTrack = topTracks;
-        console.log(artist);
-        console.log(topTracks);
         this.loading = false;
       },
       error: error => console.error({ error })
@@ -51,6 +50,12 @@ export class ArtistComponent implements OnInit {
 
   getArtistTopTracks(id: string): Observable<ArtistByIDTopTrack> {
     return this.spotifyService.getArtistByIdTopTracks(id)
-    
+  }
+
+  refresToken() {
+    this.spotifyService.refresToken().subscribe((data: any) => {
+      this.spotifyService.setToken(data.access_token);
+      localStorage.setItem('token', data.access_token);
+    });
   }
 }

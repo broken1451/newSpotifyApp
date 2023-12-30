@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyService) { }
 
-  ngOnInit() {
+ async ngOnInit() {
+    this.refresToken();
     this.getNewReleases();
   }
 
@@ -35,6 +36,13 @@ export class HomeComponent implements OnInit {
         this.loading = false;
         this.msgError = 'Error en el servidor, por favor intente más tarde.';
       }
+    });
+  }
+
+  refresToken() {
+    this.spotifyService.refresToken().subscribe((data: any) => {
+      this.spotifyService.setToken(data.access_token);
+      localStorage.setItem('token', data.access_token);
     });
   }
 

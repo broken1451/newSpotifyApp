@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit {
   constructor(private spotifyService: SpotifyService) { }
     
   ngOnInit(): void {
+    this.refresToken();
   }
 
   public buscar(termino: string) {
@@ -45,4 +46,10 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  refresToken() {
+    this.spotifyService.refresToken().subscribe((data: any) => {
+      this.spotifyService.setToken(data.access_token);
+      localStorage.setItem('token', data.access_token);
+    });
+  }
 }

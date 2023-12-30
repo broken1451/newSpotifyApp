@@ -21,10 +21,14 @@ export class InterceptorSpotify implements HttpInterceptor {
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Access-Control-Allow-Methods', 'POST,GET,DELETE,PATCH');
     console.log(`Intercept service: ${request?.url}, method: ${request?.method}`);
-
-    const reqWithHeader = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer BQCCAP6TZ3BWkILfMo24tpG6yv-x1SNZT4ZwI0ooetEWTXeYikGtuC-JGbGvpRZkMIBwMscvpv7W5ZSOEzbtFo-BRfjXiPsk0PlVbsxj53UsySEBchg'),
-    });
+    let reqWithHeader;
+    if (request.url.includes('/generate-token')) {
+      reqWithHeader = request.clone({});
+    } else {
+      reqWithHeader = request.clone({
+        headers: request.headers.set('Authorization', `Bearer ${localStorage.getItem('token')!}`),
+      });
+    }
 
     return next.handle(reqWithHeader).pipe(
       map(event => {

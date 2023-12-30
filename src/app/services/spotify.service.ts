@@ -10,9 +10,15 @@ import { ArtistByIDTopTrack, Track } from '../components/interfaces/artist-by-id
 @Injectable()
 export class SpotifyService {
 
-  public paises: any[] = [];
+  public token: string = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { 
+
+  }
+
+  setToken(token: string): void {
+    this.token = token;
+  }
 
   getNewReleases(): Observable<Item[]> {
     // const headers = new HttpHeaders({
@@ -48,5 +54,10 @@ export class SpotifyService {
 
   getArtistByIdTopTracks(id: string): Observable<ArtistByIDTopTrack> {
     return this.httpClient.get<ArtistByIDTopTrack>(`${environment.url}/v1/artists/${id}/top-tracks?market=US`, {}).pipe(delay(2000));
+  }
+
+
+  refresToken() {
+      return this.httpClient.get<any>(`${environment.urlToken}`, {}).pipe();
   }
 }
