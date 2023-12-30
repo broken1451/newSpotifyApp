@@ -12,6 +12,13 @@ export class AppComponent implements OnInit {
   constructor(private spotifyService: SpotifyService) {}
 
   ngOnInit() {
+    this.refresToken();
+  }
 
+  refresToken() {
+    this.spotifyService.refresToken().subscribe((data: any) => {
+      this.spotifyService.setToken(data.access_token);
+      localStorage.setItem('token', data.access_token);
+    });
   }
 }
