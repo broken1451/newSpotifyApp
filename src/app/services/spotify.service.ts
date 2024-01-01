@@ -53,7 +53,7 @@ export class SpotifyService {
   }
 
   getArtistByIdTopTracks(id: string): Observable<ArtistByIDTopTrack> {
-    return this.httpClient.get<ArtistByIDTopTrack>(`${environment.url}/v1/artists/${id}/top-tracks?market=US`, {}).pipe(delay(2000));
+    return this.httpClient.get<ArtistByIDTopTrack>(`${environment.url}/v1/artists/${id}/top-tracks?market=US&limit=20`, {}).pipe(delay(2000));
   }
 
 
